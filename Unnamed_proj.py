@@ -1,19 +1,19 @@
 import numpy as np
+import pandas as pd
 from tkinter import *
 import os
 
-board = np.array([
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0],
-				[0,0,0,0,0,0,0,0,0,0]
-				])
+board = pd.DataFrame({'0' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'1' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'2' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'3' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'4' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'5' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'6' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'7' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'8' : np.array(['--','--','--','--','--','--','--','--','--','--']),
+						'9' : np.array(['--','--','--','--','--','--','--','--','--','--'])},
+						index = [0,1,2,3,4,5,6,7,8,9])
 
 	
 position = {}
@@ -24,7 +24,7 @@ position['curcol'] = 0
 position['prevrow'] = 0
 position['prevcol'] = 0
 
-board[position['currow']][position['curcol']] = 1
+board.iloc[position['currow']][position['curcol']] = '#'
 
 def right(position):
 	if position['curcol']==9:
@@ -33,8 +33,8 @@ def right(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['curcol'] = position['curcol']+1
-		board[position['currow']][position['curcol']] = 1
-		board[position['prevrow']][position['prevcol']] = 0
+		board.iloc[position['currow']][position['curcol']] = '#'
+		board.iloc[position['prevrow']][position['prevcol']] = '--'
 	os.system("cls")
 	print("{}\n\nCurrent position: {},{}".format(board,position['currow'],position['curcol']))
 	
@@ -45,8 +45,8 @@ def left(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['curcol'] = position['curcol']-1
-		board[position['currow']][position['curcol']] = 1
-		board[position['prevrow']][position['prevcol']] = 0
+		board.iloc[position['currow']][position['curcol']] = '#'
+		board.iloc[position['prevrow']][position['prevcol']] = '--'
 	os.system("cls")
 	print("{}\n\nCurrent position: {},{}".format(board,position['currow'],position['curcol']))
 	
@@ -57,8 +57,8 @@ def up(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['currow'] = position['currow']-1
-		board[position['currow']][position['curcol']] = 1
-		board[position['prevrow']][position['prevcol']] = 0
+		board.iloc[position['currow']][position['curcol']] = '#'
+		board.iloc[position['prevrow']][position['prevcol']] = '--'
 	os.system("cls")
 	print("{}\n\nCurrent position: {},{}".format(board,position['currow'],position['curcol']))
 	
@@ -69,8 +69,8 @@ def down(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['currow'] = position['currow']+1
-		board[position['currow']][position['curcol']] = 1
-		board[position['prevrow']][position['prevcol']] = 0
+		board.iloc[position['currow']][position['curcol']] = '#'
+		board.iloc[position['prevrow']][position['prevcol']] = '--'
 	os.system("cls")
 	print("{}\n\nCurrent position: {},{}".format(board,position['currow'],position['curcol']))
 
