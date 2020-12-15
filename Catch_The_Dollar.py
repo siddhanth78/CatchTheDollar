@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
-from tkinter import *
-from tkinter import messagebox
+import keyboard
 import os
 import random
 
@@ -116,30 +115,19 @@ def movement(position):
 	os.system("cls")
 	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 	if position['currx'] == position['curcol'] and position['curry'] == position['currow']:
-		board.iloc[position['curry']][position['currx']] = '#'
+		board.iloc[position['curry']][position['currx']] = '#$'
 		os.system("cls")
 		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
-		messagebox.showinfo("You win","Congratulations! You caught the dollar in {} moves!".format(ct))
-		root.destroy()
-		quit()
+		print("\nCongratulations! You caught the dollar in {} moves!".format(ct))
+		input()
 
 os.system("cls")
 print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 
-root = Tk()
-root.geometry("235x100+500+200")
-root.title("Controls")
+keyboard.add_hotkey('right arrow',lambda:right(position))
+keyboard.add_hotkey('left arrow',lambda:left(position))
+keyboard.add_hotkey('up arrow',lambda:up(position))
+keyboard.add_hotkey('down arrow',lambda:down(position))
 
-UP = Button(root,text="UP",width=10,command = lambda : up(position))
-UP.grid(row=0,column=1)
-
-DOWN = Button(root,text="DOWN",width=10,command = lambda : down(position))
-DOWN.grid(row=1,column=1)
-
-LEFT = Button(root,text="LEFT",width=10,command = lambda : left(position))
-LEFT.grid(row=1,column=0)
-
-RIGHT = Button(root,text="RIGHT",width=10,command = lambda : right(position))
-RIGHT.grid(row=1,column=2)
-
-root.mainloop()
+while True:
+	continue
