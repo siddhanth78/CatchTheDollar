@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from tkinter import *
+from tkinter import messagebox
 import os
 import random
 
@@ -16,7 +17,8 @@ board = pd.DataFrame({'0' : np.array(['--','--','--','--','--','--','--','--','-
 						'9' : np.array(['--','--','--','--','--','--','--','--','--','--'])},
 						index = [0,1,2,3,4,5,6,7,8,9])
 
-	
+ct=0
+
 position = {}
 
 position['currx'] = random.randint(1,9)
@@ -79,6 +81,8 @@ def down(position):
 	movement(position)
 	
 def movement(position):
+	global ct
+	ct+=1
 	chancevert = random.randint(1,2)
 	chancehorz = random.randint(1,2)
 	position['prevx'] = position['currx']
@@ -110,15 +114,17 @@ def movement(position):
 	if position['prevx'] == position['curcol'] and position['prevy'] == position['currow']:
 		board.iloc[position['currow']][position['curcol']] = '#'
 	os.system("cls")
-	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}".format(board,position['currow'],position['curcol'],position['curry'],position['currx']))
+	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 	if position['currx'] == position['curcol'] and position['curry'] == position['currow']:
 		board.iloc[position['curry']][position['currx']] = '#'
 		os.system("cls")
-		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}".format(board,position['currow'],position['curcol'],position['curry'],position['currx']))
-		print("\nYou caught the dollar!")
+		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
+		messagebox.showinfo("You win","Congratulations! You caught the dollar!")
+		root.destroy()
+		quit()
 
 os.system("cls")
-print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}".format(board,position['currow'],position['curcol'],position['curry'],position['currx']))
+print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 
 root = Tk()
 root.geometry("235x100+500+200")
