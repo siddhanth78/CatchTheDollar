@@ -45,7 +45,7 @@ def right(position):
 		position['curcol'] = position['curcol']+1
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
-	movement(position)
+		movement(position)
 	
 def left(position):
 	if position['curcol']==0:
@@ -56,7 +56,7 @@ def left(position):
 		position['curcol'] = position['curcol']-1
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
-	movement(position)
+		movement(position)
 	
 def up(position):
 	if position['currow']==0:
@@ -67,7 +67,7 @@ def up(position):
 		position['currow'] = position['currow']-1
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
-	movement(position)
+		movement(position)
 	
 def down(position):
 	if position['currow']==9:
@@ -78,7 +78,7 @@ def down(position):
 		position['currow'] = position['currow']+1
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
-	movement(position)
+		movement(position)
 	
 def movement(position):
 	global ct
