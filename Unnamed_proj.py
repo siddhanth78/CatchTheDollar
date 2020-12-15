@@ -78,19 +78,19 @@ os.system("cls")
 print("{}\n\nCurrent position: {},{}".format(board,position['currow'],position['curcol']))
 
 root = Tk()
-root.geometry("250x100+500+200")
+root.geometry("235x100+500+200")
 root.title("Controls")
 
-UP = Button(root,text="UP",command = lambda : up(position))
+UP = Button(root,text="UP",width=10,command = lambda : up(position))
 UP.grid(row=0,column=1)
 
-DOWN = Button(root,text="DOWN",command = lambda : down(position))
+DOWN = Button(root,text="DOWN",width=10,command = lambda : down(position))
 DOWN.grid(row=1,column=1)
 
-LEFT = Button(root,text="LEFT",command = lambda : left(position))
+LEFT = Button(root,text="LEFT",width=10,command = lambda : left(position))
 LEFT.grid(row=1,column=0)
 
-RIGHT = Button(root,text="RIGHT",command = lambda : right(position))
+RIGHT = Button(root,text="RIGHT",width=10,command = lambda : right(position))
 RIGHT.grid(row=1,column=2)
 
 root.mainloop()
