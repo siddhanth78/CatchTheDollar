@@ -119,7 +119,7 @@ def movement(position):
 		board.iloc[position['curry']][position['currx']] = '#'
 		os.system("cls")
 		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
-		messagebox.showinfo("You win","Congratulations! You caught the dollar!")
+		messagebox.showinfo("You win","Congratulations! You caught the dollar in {} moves!".format(ct))
 		root.destroy()
 		quit()
 
