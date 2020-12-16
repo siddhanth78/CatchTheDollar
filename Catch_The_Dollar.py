@@ -144,10 +144,9 @@ def movement(position):
 	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 	if position['currx'] == position['curcol'] and position['curry'] == position['currow']:
 		board.iloc[position['curry']][position['currx']] = '#$'
-		os.system("cls")
-		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
-		print("\nCongratulations! You caught the dollar in {} moves!".format(ct))
+		win(position)
 		quit()
+		
 	
 def death(position):
 	board.iloc[position['currow']][position['curcol']] = '#X'
@@ -155,6 +154,12 @@ def death(position):
 	os.system('cls')
 	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 	print("\nYou died.")
+	
+def win(position):
+	global ct
+	os.system("cls")
+	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
+	print("\nCongratulations! You caught the dollar in {} moves!".format(ct))
 
 os.system("cls")
 print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
