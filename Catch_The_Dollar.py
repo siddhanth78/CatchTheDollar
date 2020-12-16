@@ -17,6 +17,7 @@ board = pd.DataFrame({'0' : np.array(['--','--','--','--','--','--','--','--','-
 						index = [0,1,2,3,4,5,6,7,8,9])
 
 ct=0
+ctx=0
 
 position = {}
 
@@ -42,6 +43,9 @@ def right(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['curcol'] = position['curcol']+1
+		if board.iloc[position['currow']][position['curcol']] == 'X':
+			death(position)
+			quit()
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
 		movement(position)
@@ -53,6 +57,9 @@ def left(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['curcol'] = position['curcol']-1
+		if board.iloc[position['currow']][position['curcol']] == 'X':
+			death(position)
+			quit()
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
 		movement(position)
@@ -64,6 +71,9 @@ def up(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['currow'] = position['currow']-1
+		if board.iloc[position['currow']][position['curcol']] == 'X':
+			death(position)
+			quit()
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
 		movement(position)
@@ -75,13 +85,17 @@ def down(position):
 		position['prevrow'] = position['currow']
 		position['prevcol'] = position['curcol']
 		position['currow'] = position['currow']+1
+		if board.iloc[position['currow']][position['curcol']] == 'X':
+			death(position)
+			quit()
 		board.iloc[position['currow']][position['curcol']] = '#'
 		board.iloc[position['prevrow']][position['prevcol']] = '--'
 		movement(position)
 	
 def movement(position):
-	global ct
+	global ct,ctx
 	ct+=1
+	ctx+=1
 	chancevert = random.randint(1,2)
 	chancehorz = random.randint(1,2)
 	position['prevx'] = position['currx']
@@ -108,8 +122,22 @@ def movement(position):
 				position['currx'] = position['currx']-1
 			else:
 				position['currx'] = position['currx']+1
-	board.iloc[position['curry']][position['currx']] = '$'
-	board.iloc[position['prevy']][position['prevx']] = '--'
+				
+	if board.iloc[position['curry']][position['currx']] == 'X':
+		board.iloc[position['curry']][position['currx']] = '$X'
+	else:
+		board.iloc[position['curry']][position['currx']] = '$'
+		
+	if ctx%3==0:
+		if board.iloc[position['prevy']][position['prevx']] == '$X':
+			board.iloc[position['prevy']][position['prevx']] = 'X'
+		else:
+			board.iloc[position['prevy']][position['prevx']] = 'X'
+	else:
+		if board.iloc[position['prevy']][position['prevx']] == '$X':
+			board.iloc[position['prevy']][position['prevx']] = 'X'
+		else:
+			board.iloc[position['prevy']][position['prevx']] = '--'
 	if position['prevx'] == position['curcol'] and position['prevy'] == position['currow']:
 		board.iloc[position['currow']][position['curcol']] = '#'
 	os.system("cls")
@@ -119,7 +147,14 @@ def movement(position):
 		os.system("cls")
 		print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
 		print("\nCongratulations! You caught the dollar in {} moves!".format(ct))
-		input()
+		quit()
+	
+def death(position):
+	board.iloc[position['currow']][position['curcol']] = '#X'
+	board.iloc[position['prevrow']][position['prevcol']] = '--'
+	os.system('cls')
+	print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
+	print("\nYou died.")
 
 os.system("cls")
 print("Catch the dollar\n\n{}\n\nYour position: {},{}\nDollar position: {},{}\nMoves: {}".format(board,position['currow'],position['curcol'],position['curry'],position['currx'],ct))
